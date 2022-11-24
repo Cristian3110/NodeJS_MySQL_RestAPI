@@ -4,8 +4,10 @@
 
 import { pool } from '../src/db.js';
 
-export const getEmployee = (req, res) => {
-	res.send('Obteniendo empleados');
+export const getEmployee = async (req, res) => {
+	//obteniendo todos los empleados
+	const [rows] = await pool.query('SELECT * FROM employee');
+	res.send({ rows });
 };
 
 // export const createEmployee = (req, res) => {
