@@ -4,10 +4,27 @@
 
 import { pool } from '../src/db.js';
 
-export const getEmployee = async (req, res) => {
+export const getEmployees = async (req, res) => {
 	//obteniendo todos los empleados
 	const [rows] = await pool.query('SELECT * FROM employee');
 	res.send({ rows });
+};
+
+export const getEmployee = async (req, res) => {
+	// console.log(req.params);
+	// console.log(req.params.id);
+	const [rows] = await pool.query('SELECT * FROM employee WHERE id = ?', [req.params.id]);
+	// console.log(rows);
+	if (rows.length <= 0) {
+		return res.status(404).json({
+			msg: 'Employee not found',
+		});
+	} else {
+		res.status(200).json({
+			rows,
+		});
+	}
+	// res.send('Obteniendo Empleado');
 };
 
 // export const createEmployee = (req, res) => {
