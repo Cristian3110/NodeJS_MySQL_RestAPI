@@ -49,10 +49,26 @@ export const createEmployee = async (req, res) => {
 	});
 };
 
-export const updateEemployee = (req, res) => {
-	res.send('Actualizando empleados');
+export const deleteEmployee = async (req, res) => {
+	// res.send('Eliminando empleados');
+	const [ResultSetHeader] = await pool.query('DELETE FROM employee WHERE id=?', [
+		req.params.id,
+	]);
+
+	if (ResultSetHeader.affectedRows <= 0) {
+		res.status(404).json({
+			msg: `Employee ${req.params.id} no found`,
+		});
+	} else {
+		// res.sendStatus(204);
+		// res.status(204).json({
+		// 	msg: 'Employee Deleted',
+		// });
+		res.send('Employee Deleted');
+	}
+	// console.log(ResultSetHeader.affectedRows);
 };
 
-export const deleteEmployee = (req, res) => {
-	res.send('Eliminando empleados');
+export const updateEemployee = (req, res) => {
+	res.send('Actualizando empleados');
 };
