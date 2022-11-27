@@ -3,7 +3,7 @@ import {
 	getEmployees,
 	getEmployee,
 	createEmployee,
-	updateEemployee,
+	updateEmployee,
 	deleteEmployee,
 } from '../../controllers/employees.js';
 
@@ -15,7 +15,7 @@ router.get('/employees/:id', getEmployee);
 
 router.post('/employees', createEmployee);
 
-router.put('/employees', updateEemployee);
+router.put('/employees/:id', updateEmployee);
 
 router.delete('/employees/:id', deleteEmployee);
 

@@ -69,6 +69,31 @@ export const deleteEmployee = async (req, res) => {
 	// console.log(ResultSetHeader.affectedRows);
 };
 
-export const updateEemployee = (req, res) => {
-	res.send('Actualizando empleados');
+export const updateEmployee = async (req, res) => {
+	// res.send('Actualizando empleados');
+	//Nota: const id = req.params.id es lo mismo q lo de abajo
+	const { id } = req.params;
+	const { name, salary } = req.body;
+	// console.log(id, name, salary);
+
+	const [result] = await pool.query(
+		'UPDATE employee SET name = ?, salary = ? WHERE id= ?',
+		[name, salary, id]
+	);
+
+	if (result.affectedRows <= 0) {
+		res.status(404).json({
+			msg: `Employee ${id} not found and not update`,
+		});
+	} else {
+		const [rows] = await pool.query('SELECT * FROM employee WHERE id=?', [id]);
+		// para que no me muestre arrays sino el object
+		res.json({
+			msg: `Employee ${id} Updated`,
+			Update: rows[0],
+		});
+		// res.json(rows[0]);
+	}
+
+	console.log(result);
 };
