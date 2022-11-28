@@ -97,3 +97,32 @@ export const updateEmployee = async (req, res) => {
 
 	console.log(result);
 };
+
+export const updatePachtEmployee = async (req, res) => {
+	// res.send('Actualizando empleados parcializados');
+
+	const { id } = req.params;
+	const { name, salary } = req.body;
+
+	// Se utiliza IFNULL de SQL para identificar
+	const [result] = await pool.query(
+		'UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id= ?',
+		[name, salary, id]
+	);
+
+	if (result.affectedRows <= 0) {
+		res.status(404).json({
+			msg: `Employee ${id} not found and not update partialed`,
+		});
+	} else {
+		const [rows] = await pool.query('SELECT * FROM employee WHERE id=?', [id]);
+		// para que no me muestre arrays sino el object
+		res.json({
+			msg: `Employee ${id} Updated Partialed`,
+			Update: rows[0],
+		});
+		// res.json(rows[0]);
+	}
+
+	console.log(result);
+};
