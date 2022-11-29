@@ -1,5 +1,5 @@
 // se utiliza js porque se está trabajando con módulos
-import { pool } from '../src/db.js';
+import { pool } from '../db.js';
 
 export const getIndex = async (req, res) => {
 	// res.send('pong');

@@ -6,7 +6,7 @@ import {
 	updateEmployee,
 	deleteEmployee,
 	updatePachtEmployee,
-} from '../../controllers/employees.js';
+} from '../controllers/employees.js';
 
 const router = Router();
 

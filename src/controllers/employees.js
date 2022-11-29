@@ -2,7 +2,7 @@
  * Controladores de nuestras rutas
  */
 
-import { pool } from '../src/db.js';
+import { pool } from '../db.js';
 
 export const getEmployees = async (req, res) => {
 	try {
