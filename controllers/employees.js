@@ -10,7 +10,7 @@ export const getEmployees = async (req, res) => {
 		const [rows] = await pool.query('SELECT * FROM employee');
 		res.send({ rows });
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 		console.log(error);
@@ -36,7 +36,7 @@ export const getEmployee = async (req, res) => {
 		}
 		// res.send('Obteniendo Empleado');
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 	}
@@ -63,7 +63,7 @@ export const createEmployee = async (req, res) => {
 			salary,
 		});
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 	}
@@ -89,7 +89,7 @@ export const deleteEmployee = async (req, res) => {
 		}
 		// console.log(ResultSetHeader.affectedRows);
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 	}
@@ -124,7 +124,7 @@ export const updateEmployee = async (req, res) => {
 
 		console.log(result);
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 	}
@@ -159,7 +159,7 @@ export const updatePachtEmployee = async (req, res) => {
 
 		console.log(result);
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'something goes wrong',
 		});
 	}
